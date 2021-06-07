@@ -1,2 +1,2 @@
-# Android-app-for-physical exercises in physiotherapy
+# Android app for physical exercises in physiotherapy
  
