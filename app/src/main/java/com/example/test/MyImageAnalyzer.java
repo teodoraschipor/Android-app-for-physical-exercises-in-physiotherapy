@@ -5,7 +5,6 @@ import android.annotation.SuppressLint;
 import android.media.Image;
 import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.camera.core.ImageAnalysis;
@@ -26,8 +25,6 @@ import com.google.mlkit.vision.pose.accurate.AccuratePoseDetectorOptions;
 
 import java.util.List;
 
-import static com.example.test.Diagnostic.getAngle;
-import static com.example.test.Diagnostic.setScoliosis;
 
 public class MyImageAnalyzer implements ImageAnalysis.Analyzer {
 
@@ -128,7 +125,7 @@ public class MyImageAnalyzer implements ImageAnalysis.Analyzer {
 
 
 
-        double rightHipAngle = getAngle(
+       /* double rightHipAngle = getAngle(
                 pose.getPoseLandmark(rightHip.getLandmarkType()),
                 pose.getPoseLandmark(rightKnee.getLandmarkType()),
                 pose.getPoseLandmark(rightHeel.getLandmarkType()));
@@ -136,7 +133,7 @@ public class MyImageAnalyzer implements ImageAnalysis.Analyzer {
         double angles[] = setScoliosis(leftShoulder, rightShoulder, rightHip, leftHip);
         String s = Float.toString(x);
         Log.i("Angle[shoulders] =", Double.toString(angles[0]));
-        Log.i("Shoulders likelihood: ", Float.toString(frameLikelihood1));
+        Log.i("Shoulders likelihood: ", Float.toString(frameLikelihood1));*/
     }
 
 }

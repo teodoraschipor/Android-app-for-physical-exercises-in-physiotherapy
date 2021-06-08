@@ -7,6 +7,7 @@ public class User implements Serializable {
     public String fullName;
     public String age;
     public String email;
+    public Diagnostic[] diagnoses;
 
     public User() {
 

@@ -1,20 +1,27 @@
-package com.example.test;
-
+package com.example.test.Entities;
 
 import com.google.mlkit.vision.pose.PoseLandmark;
 
+import java.io.Serializable;
+
 import static java.lang.Math.atan2;
 
+public class Angles implements Serializable {
 
-// Nu stiu inca exact cum voi folosi asta. Trebuie sa fac legatura cumva cu baza de date
-public class Diagnostic {
+    public double scoliosis;
+    public double kyphosis;
+    public double lordosis;
+    public double roundedShoulders;
+    public double kneeValgus;
+    public double kneeVarus;
 
-    private double scoliosis;
-    private double kyphosis;
-    private double lordosis;
-    private double roundedShoulders;
-    private double kneeValgus;
-    private double kneeVarus;
+
+    //------------CONSTRUCTORS-----------
+    public Angles(){
+
+    }
+
+    //------------METHODS-------------
 
     // Method that returns the angle between 3 PoseLandmark points:
     static double getAngle(PoseLandmark firstPoint, PoseLandmark midPoint, PoseLandmark lastPoint) {
@@ -47,9 +54,13 @@ public class Diagnostic {
         return result;
     }
 
-    // Method that returns the angle between shoulders and hips in case of setScoliosis:
-    static double[] setScoliosis(PoseLandmark upperShoulder, PoseLandmark lowerShoulder, PoseLandmark upperHip, PoseLandmark lowerHip){
+    //-------------GETTERS & SETTERS---------------
 
+    public double getScoliosis() {
+        return scoliosis;
+    }
+
+    public void setScoliosis(PoseLandmark upperShoulder, PoseLandmark lowerShoulder, PoseLandmark upperHip, PoseLandmark lowerHip) {
         double projectionX = upperShoulder.getPosition().x;
         double projectionY = lowerShoulder.getPosition().y;
 
@@ -62,13 +73,8 @@ public class Diagnostic {
         double hipAngle = getAngle2(upperHip.getPosition().x, upperHip.getPosition().y,
                 lowerHip.getPosition().x, lowerHip.getPosition().y, projectionX, projectionY);
 
-        double[] angles = new double[2];
-        angles[0] = shoulderAngle;
-        angles[1] = hipAngle;
+        double angle = Math.max(shoulderAngle, hipAngle);
 
-        return angles;
-        // de adaugat: setare valoare scoliosis cu probabilitatea...
-        // setare valoare unghiuri...
+        this.scoliosis = angle;
     }
-
 }
