@@ -1,8 +1,12 @@
 package com.example.test.Entities;
 
-public class User {
+import java.io.Serializable;
 
-    private String fullName, age, email;
+public class User implements Serializable {
+
+    public String fullName;
+    public String age;
+    public String email;
 
     public User() {
 

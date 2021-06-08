@@ -2,6 +2,7 @@ package com.example.test.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -134,8 +135,8 @@ public class RegisterUserActivity extends AppCompatActivity implements View.OnCl
                         public void onComplete(@NonNull @NotNull Task<Void> task) {
                             if(task.isSuccessful()){
                                 Toast.makeText(RegisterUserActivity.this, "User has been registered successfully!", Toast.LENGTH_LONG).show();
-                                progressBar.setVisibility(View.VISIBLE);
-
+                                progressBar.setVisibility(View.GONE);
+                                Log.i("SUCCESFULLCOMPLETE ","YAY");
                                 // Redirect to login layout!
 
                             } else {
