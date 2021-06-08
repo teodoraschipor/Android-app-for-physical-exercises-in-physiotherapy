@@ -22,6 +22,7 @@
         <activity android:name=".Activities.CameraActivity"></activity>
         <activity android:name=".Activities.LogInActivity"></activity>
         <activity android:name=".Activities.RegisterUserActivity"></activity>
+        <activity android:name=".Activities.ForgotPasswordActivity"></activity>
     </application>
 
 </manifest>

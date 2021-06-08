@@ -17,10 +17,10 @@
         android:id="@+id/btnCamera"/>
 
     <Button
-        android:id="@+id/btnLogIn"
+        android:id="@+id/btnLogOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Log in"
+        android:text="Log Out"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

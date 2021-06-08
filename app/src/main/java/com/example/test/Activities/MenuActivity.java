@@ -8,10 +8,11 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.test.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MenuActivity extends AppCompatActivity implements View.OnClickListener{
     private Button cameraButton;
-    private Button logInButton;
+    private Button logOutButton;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,8 +21,8 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         cameraButton = findViewById(R.id.btnCamera);
         cameraButton.setOnClickListener((View.OnClickListener) this);
 
-        logInButton = findViewById(R.id.btnLogIn);
-        logInButton.setOnClickListener(this);
+        logOutButton = findViewById(R.id.btnLogOut);
+        logOutButton.setOnClickListener(this);
 
 
     }
@@ -33,7 +34,8 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btnCamera:
                 startActivity(new Intent(this, CameraActivity.class));
                 break;
-            case R.id.btnLogIn:
+            case R.id.btnLogOut:
+                FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(this, LogInActivity.class));
                 break;
         }
