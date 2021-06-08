@@ -15,6 +15,7 @@ public class Diagnostic implements Serializable {
     public String imagePath;
     public Angles angles;
     public Date date;
+    public String userId; // nu stiu inca 
 
     public Diagnostic(String imagePath){
         this.imagePath = imagePath;
