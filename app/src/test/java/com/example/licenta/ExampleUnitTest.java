@@ -1,4 +1,4 @@
-package com.example.test;
+package com.example.licenta;
 
 import org.junit.Test;
 
