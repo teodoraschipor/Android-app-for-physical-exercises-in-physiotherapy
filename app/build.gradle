@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.test"
-        minSdkVersion 23
+        minSdkVersion 24
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -48,6 +48,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-auth'
     implementation 'com.google.firebase:firebase-storage'
+
+    implementation 'com.google.firebase:firebase-database:19.2.0'
 
     // CameraX core library using the camera2 implementation
     def camerax_version = "1.0.0"

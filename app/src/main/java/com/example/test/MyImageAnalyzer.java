@@ -118,9 +118,6 @@ public class MyImageAnalyzer implements ImageAnalysis.Analyzer {
         PoseLandmark rightMouth = pose.getPoseLandmark(PoseLandmark.RIGHT_MOUTH);
 
 
-        float x = leftShoulder.getPosition3D().getX();
-        float frameLikelihood = rightHeel.getInFrameLikelihood();
-        float frameLikelihood1 = leftShoulder.getInFrameLikelihood();
 
 
 
@@ -133,7 +130,7 @@ public class MyImageAnalyzer implements ImageAnalysis.Analyzer {
         String s = Float.toString(x);
         Log.i("Angle[shoulders] =", Double.toString(angles[0]));
         Log.i("Shoulders likelihood: ", Float.toString(frameLikelihood1));*/
-        Log.i("PERSOANA GASITA ", Float.toString(frameLikelihood1));
+
     }
 
 }

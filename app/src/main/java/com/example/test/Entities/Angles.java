@@ -77,4 +77,8 @@ public class Angles implements Serializable {
 
         this.scoliosis = angle;
     }
+
+    public void setKyphosis(double x){
+        this.kyphosis = x;
+    }
 }

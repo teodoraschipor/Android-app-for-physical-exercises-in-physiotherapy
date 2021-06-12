@@ -33,6 +33,7 @@ import com.google.common.util.concurrent.ListenableFuture;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -74,12 +75,12 @@ public class CameraActivity extends AppCompatActivity {
                 //  ProcessCameraProvider processCameraProvider = null;
                 try {
                     //add permission to the camera + write external storage:
-                    if(ActivityCompat.checkSelfPermission(CameraActivity.this, Manifest.permission.CAMERA) != (PackageManager.PERMISSION_GRANTED)
-                        && ActivityCompat.checkSelfPermission(CameraActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != (PackageManager.PERMISSION_GRANTED)
-                    ){
+                    if (ActivityCompat.checkSelfPermission(CameraActivity.this, Manifest.permission.CAMERA) != (PackageManager.PERMISSION_GRANTED)
+                            && ActivityCompat.checkSelfPermission(CameraActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != (PackageManager.PERMISSION_GRANTED)
+                    ) {
                         ActivityCompat.requestPermissions(CameraActivity.this, new String[]{Manifest.permission.CAMERA}, 101);
                         ActivityCompat.requestPermissions(CameraActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 101);
-                    }else{
+                    } else {
                         ProcessCameraProvider processCameraProvider = (ProcessCameraProvider) cameraProviderFuture.get();
                         bindpreview(processCameraProvider);
                     }
@@ -125,9 +126,9 @@ public class CameraActivity extends AppCompatActivity {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                long time = ((startTime - System.currentTimeMillis())/1000) + 5;
+                long time = ((startTime - System.currentTimeMillis()) / 1000) + 5;
                 textViewTimer.setText(Long.toString(time));
-                handler.postDelayed(this,1000);
+                handler.postDelayed(this, 1000);
             }
         };
 
@@ -139,20 +140,32 @@ public class CameraActivity extends AppCompatActivity {
             public void run() {
                 handler.removeCallbacks(runnable); //stop next runnable execution
                 textViewTimer.setVisibility(GONE);
-                captureImage(imageCapture);
+               // captureImage(imageCapture);
             }
         }, 5000);
     }
 
+    /*public File getOutputDirectory() {
+
+        File outputDir = File(Arrays.stream(getExternalMediaDirs()).findFirst(), getResources().getString());
+        outputDir.mkdirs();
+        return outputDir;
+
+    }
+
     public void captureImage(ImageCapture imageCapture){
-        String path = "/app/res/drawable";
+
+        File outputDirectory = getOutputDirectory();
         ImageCapture.OutputFileOptions outputFileOptions =
-                new ImageCapture.OutputFileOptions.Builder(new File(path)).build();
+                new ImageCapture.OutputFileOptions.Builder(new File(
+                        outputDirectory, System.currentTimeMillis() + ".jpg")).build();
         imageCapture.takePicture(outputFileOptions, cameraExecutor,
                 new ImageCapture.OnImageSavedCallback() {
                     @Override
                     public void onImageSaved(ImageCapture.OutputFileResults outputFileResults) {
-                        Diagnostic diagnostic = new Diagnostic(path); // aici trebuie cumva sa adaug la "path" + numele imaginii. Ca sa fie path-ul catre imaginea capturata
+
+                        Diagnostic diagnostic = new Diagnostic();
+                        diagnostic.setImagePath(outputDirectory.getAbsolutePath());
                     }
 
                     @Override
@@ -161,6 +174,6 @@ public class CameraActivity extends AppCompatActivity {
                     }
                 }
         );
-    }
+    }*/
 }
 

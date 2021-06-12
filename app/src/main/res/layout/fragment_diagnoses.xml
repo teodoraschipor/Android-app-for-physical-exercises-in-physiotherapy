@@ -1,13 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
-</LinearLayout>
+    <Button
+        android:id="@+id/scoliosisBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scoliosis"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="150dp"/>
+
+    <Button
+        android:id="@+id/kyphosisBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kyphosis"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scoliosisBtn"
+        android:layout_marginTop="50dp"/>
+    <Button
+        android:id="@+id/lordosisBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lordosis"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/kyphosisBtn"
+        android:layout_marginTop="50dp"/>
+
+    <Button
+        android:id="@+id/kneeVarus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Knee Varus"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lordosisBtn"
+        android:layout_marginTop="50dp"/>
+
+    <Button
+        android:id="@+id/kneeValgus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Knee Valgus"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/kneeVarus"
+        android:layout_marginTop="50dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

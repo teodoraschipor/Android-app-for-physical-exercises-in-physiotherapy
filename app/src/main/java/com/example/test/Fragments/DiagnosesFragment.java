@@ -8,31 +8,17 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.test.R;
 
 import org.jetbrains.annotations.NotNull;
 
 public class DiagnosesFragment extends Fragment {
-
-    public DiagnosesFragment(){
-        super(R.layout.fragment_diagnoses);
-    }
-
     @Nullable
+    @org.jetbrains.annotations.Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_diagnoses, container, false);
         return super.onCreateView(inflater, container, savedInstanceState);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-       // initializeCategoryList();
-        RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
-       // CategoryAdapter categoryAdapter = new CategoryAdapter(category_list, this);
-       // recyclerView.setAdapter(categoryAdapter);
     }
 }
