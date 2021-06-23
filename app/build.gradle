@@ -68,5 +68,14 @@ dependencies {
     implementation 'com.google.mlkit:pose-detection-accurate:17.0.1-beta3'
     compile 'com.google.api-client:google-api-client-android:1.20.0'
     implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
+ //   implementation 'com.google.ar:core:1.15.0'
+
+    // Provides ArFragment, and other UX resources.
+ //   implementation 'com.google.ar.sceneform.ux:sceneform-ux:1.15.0'
+
+    // Alternatively, use ArSceneView without the UX dependency.
+//    implementation 'com.google.ar.sceneform:core:1.15.0'
+  //  implementation 'com.google.ar.sceneform:animation:1.17.1'
+   // implementation("com.gorisse.thomas.sceneform:sceneform:1.18.11")
 
 }

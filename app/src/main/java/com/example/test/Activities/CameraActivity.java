@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
 import android.util.Size;
+import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,21 +21,26 @@ import androidx.camera.core.CameraSelector;
 import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.ImageCapture;
 import androidx.camera.core.ImageCaptureException;
+import androidx.camera.core.ImageProxy;
 import androidx.camera.core.Preview;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.view.PreviewView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.LifecycleOwner;
 
 import com.example.test.Entities.Diagnostic;
 import com.example.test.MyImageAnalyzer;
 import com.example.test.R;
 import com.google.common.util.concurrent.ListenableFuture;
+import com.google.mlkit.vision.pose.Pose;
+import com.google.mlkit.vision.pose.PoseLandmark;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -51,7 +58,9 @@ public class CameraActivity extends AppCompatActivity {
     private ImageCapture imageCapture;
     private TextView textViewTimer;
     final Handler handler = new Handler();
-    long startTime = System.currentTimeMillis();
+
+    private int REQUEST_CODE_PERMISSIONS = 101;
+    private String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.CAMERA", "android.permission.WRITE_EXTERNAL_STORAGE"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,49 +78,54 @@ public class CameraActivity extends AppCompatActivity {
 
         analyzer = new MyImageAnalyzer(getSupportFragmentManager());
 
+
         cameraProviderFuture.addListener(new Runnable() {
             @Override
             public void run() {
-                //  ProcessCameraProvider processCameraProvider = null;
-                try {
-                    //add permission to the camera + write external storage:
-                    if (ActivityCompat.checkSelfPermission(CameraActivity.this, Manifest.permission.CAMERA) != (PackageManager.PERMISSION_GRANTED)
-                            && ActivityCompat.checkSelfPermission(CameraActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != (PackageManager.PERMISSION_GRANTED)
-                    ) {
-                        ActivityCompat.requestPermissions(CameraActivity.this, new String[]{Manifest.permission.CAMERA}, 101);
-                        ActivityCompat.requestPermissions(CameraActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 101);
-                    } else {
-                        ProcessCameraProvider processCameraProvider = (ProcessCameraProvider) cameraProviderFuture.get();
-                        bindpreview(processCameraProvider);
+
+                if (permissions()) {
+                    ProcessCameraProvider processCameraProvider = null;
+                    try {
+                        processCameraProvider = (ProcessCameraProvider) cameraProviderFuture.get();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    bindpreview(processCameraProvider);
+                } else {
+                    ActivityCompat.requestPermissions(CameraActivity.this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS);
                 }
+
             }
         }, ContextCompat.getMainExecutor(this));
     }
 
-
+    public boolean permissions(){
+        for (String permission : REQUIRED_PERMISSIONS) {
+            if (ContextCompat.checkSelfPermission(CameraActivity.this, permission) != PackageManager.PERMISSION_GRANTED) {
+                return false;
+            }
+        }
+        return true;
+    }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == 101 && grantResults.length > 0) {
-            ProcessCameraProvider processCameraProvider = null;
-            try {
-                processCameraProvider = (ProcessCameraProvider) cameraProviderFuture.get();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            bindpreview(processCameraProvider);
+        ProcessCameraProvider processCameraProvider = null;
+        try {
+            processCameraProvider = (ProcessCameraProvider) cameraProviderFuture.get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
-    }
-
+        bindpreview(processCameraProvider);
+        }
     private void bindpreview(ProcessCameraProvider processCameraProvider) {
 
+     //   ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+      //          EXTERNAL_STORAGE_PERMISSION_CODE);
         Preview preview = new Preview.Builder().build();
         CameraSelector cameraSelector = new CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_FRONT).build();
         preview.setSurfaceProvider(previewView.getSurfaceProvider());
@@ -122,6 +136,7 @@ public class CameraActivity extends AppCompatActivity {
         processCameraProvider.unbindAll();
         processCameraProvider.bindToLifecycle(this, cameraSelector, preview, imageCapture, imageAnalysis);
 
+        long startTime = System.currentTimeMillis();
         // Timer:
         Runnable runnable = new Runnable() {
             @Override
@@ -140,32 +155,56 @@ public class CameraActivity extends AppCompatActivity {
             public void run() {
                 handler.removeCallbacks(runnable); //stop next runnable execution
                 textViewTimer.setVisibility(GONE);
-               // captureImage(imageCapture);
+                captureImage(imageCapture, processCameraProvider, preview, cameraSelector, imageAnalysis);
             }
         }, 5000);
     }
 
-    /*public File getOutputDirectory() {
+    public File getOutputDirectory() {
 
-        File outputDir = File(Arrays.stream(getExternalMediaDirs()).findFirst(), getResources().getString());
-        outputDir.mkdirs();
-        return outputDir;
+        File folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+      //  File file = new File(folder, getResources().getString(R.string.directory));
+      //  File folder = new File(String.valueOf(Arrays.stream(getExternalMediaDirs()).findFirst()), getResources().getString(R.string.directory));
+        folder.mkdirs();
+        return folder;
 
     }
 
-    public void captureImage(ImageCapture imageCapture){
+    public void captureImage(ImageCapture imageCapture, ProcessCameraProvider processCameraProvider, Preview preview, CameraSelector cameraSelector, ImageAnalysis imageAnalysis){
 
         File outputDirectory = getOutputDirectory();
         ImageCapture.OutputFileOptions outputFileOptions =
                 new ImageCapture.OutputFileOptions.Builder(new File(
                         outputDirectory, System.currentTimeMillis() + ".jpg")).build();
-        imageCapture.takePicture(outputFileOptions, cameraExecutor,
+        imageCapture.takePicture(outputFileOptions, ContextCompat.getMainExecutor(this),
                 new ImageCapture.OnImageSavedCallback() {
                     @Override
                     public void onImageSaved(ImageCapture.OutputFileResults outputFileResults) {
 
-                        Diagnostic diagnostic = new Diagnostic();
-                        diagnostic.setImagePath(outputDirectory.getAbsolutePath());
+                       // Diagnostic diagnostic = new Diagnostic();
+                       // diagnostic.setImagePath(outputDirectory.getAbsolutePath());
+               //         ImageAnalysis imageAnalysis = new ImageAnalysis.Builder().setTargetResolution(new Size(1200, 700))
+                 //               .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST).build();
+                  //      imageAnalysis.setAnalyzer(imageCapture, analyzer);
+
+                       // processCameraProvider.unbindAll();
+                       // processCameraProvider.bindToLifecycle(this, cameraSelector, preview, imageCapture, imageAnalysis);
+
+                      //  analyzer.poseDetection((ImageProxy) imageCapture);
+                    //    analyzer.poseDetection(imageCapture);
+                     //   List<PoseLandmark> all = analyzer.poseLandmarks;
+                      //  Integer s = all.size();
+                    //    s.toString();
+                       // Log.i("SIZE!!! ", String.valueOf(s));
+                       // addToDatabase();
+                        //  startActivity(new Intent(CameraActivity.this, DiagnosticActivity.class));
+
+                        Log.i("MERGEEE",":)");
+               //         analyzeImage(imageCapture, processCameraProvider, preview, cameraSelector, imageAnalysis);
+                     //   addToDatabase();
+                        startActivity(new Intent(CameraActivity.this, DiagnosticActivity.class));
+
+                       // Log.i("MERGEEE",":)");
                     }
 
                     @Override
@@ -174,6 +213,26 @@ public class CameraActivity extends AppCompatActivity {
                     }
                 }
         );
-    }*/
+
+    }
+
+    public void analyzeImage(ImageCapture imageCapture, ProcessCameraProvider processCameraProvider, Preview preview, CameraSelector cameraSelector, ImageAnalysis imageAnalysis){
+        imageAnalysis.setAnalyzer(cameraExecutor, new ImageAnalysis.Analyzer() {
+            @Override
+            public void analyze(@NonNull ImageProxy image) {
+               // int rotationDegrees = image.getImageInfo().getRotationDegrees();
+                // insert your code here.
+
+
+            }
+        });
+
+
+
+        processCameraProvider.bindToLifecycle((LifecycleOwner) this, cameraSelector, imageAnalysis, preview);
+    }
+    public void addToDatabase(){
+
+    }
 }
 

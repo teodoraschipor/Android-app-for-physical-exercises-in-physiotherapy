@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.android.gms:play-services-base:17.4.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d9d6b61071f6f0282f2f4fb6fa31f42e/jetified-play-services-base-17.4.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d9d6b61071f6f0282f2f4fb6fa31f42e/jetified-play-services-base-17.4.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d9d6b61071f6f0282f2f4fb6fa31f42e/jetified-play-services-base-17.4.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c4489653113910c4cf7fcfa06b8cd5c1/play-services-base-17.4.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c4489653113910c4cf7fcfa06b8cd5c1/play-services-base-17.4.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c4489653113910c4cf7fcfa06b8cd5c1/play-services-base-17.4.0/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.gms/play-services-base/17.4.0/b51f22e2aa8e9e0c9b5ad774ad9c797ebeed1f1f/play-services-base-17.4.0-javadoc.jar!/" />

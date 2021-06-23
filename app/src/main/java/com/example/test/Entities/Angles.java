@@ -11,7 +11,6 @@ public class Angles implements Serializable {
     public double scoliosis;
     public double kyphosis;
     public double lordosis;
-    public double roundedShoulders;
     public double kneeValgus;
     public double kneeVarus;
 

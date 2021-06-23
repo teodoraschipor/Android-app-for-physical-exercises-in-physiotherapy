@@ -30,7 +30,8 @@ public class MyImageAnalyzer implements ImageAnalysis.Analyzer {
 
     private TextView textView;
     private FragmentManager fragmentManager;
-    List<PoseLandmark> allPoses;
+    public Pose poseResult;
+    public List<PoseLandmark> poseLandmarks;
 
     public MyImageAnalyzer(FragmentManager fragmentManager) {
         this.fragmentManager = fragmentManager;
@@ -57,6 +58,7 @@ public class MyImageAnalyzer implements ImageAnalysis.Analyzer {
                                 new OnSuccessListener<Pose>() {
                                     @Override
                                     public void onSuccess(Pose pose) {
+                                        poseResult = pose;
                                         readerPoseData(pose);
                                         // Task completed successfully
                                     }
@@ -81,6 +83,7 @@ public class MyImageAnalyzer implements ImageAnalysis.Analyzer {
 
         // Get all PoseLandmarks. If no person was detected, the list will be empty
         List<PoseLandmark> allPoseLandmarks = pose.getAllPoseLandmarks();
+        poseLandmarks = allPoseLandmarks;
         // Get specific PoseLandmarks individually. These will all be null if no person
         // was detected
         PoseLandmark leftShoulder = pose.getPoseLandmark(PoseLandmark.LEFT_SHOULDER);
@@ -118,7 +121,7 @@ public class MyImageAnalyzer implements ImageAnalysis.Analyzer {
         PoseLandmark rightMouth = pose.getPoseLandmark(PoseLandmark.RIGHT_MOUTH);
 
 
-
+     //   return allPoseLandmarks;
 
 
        /* double rightHipAngle = getAngle(
