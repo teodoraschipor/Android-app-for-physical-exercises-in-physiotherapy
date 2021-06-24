@@ -164,7 +164,7 @@ public class CameraActivity extends AppCompatActivity {
                 handler.removeCallbacks(runnable); //stop next runnable execution
                 textViewTimer.setVisibility(GONE);
                 captureImage(imageCapture, processCameraProvider, preview, cameraSelector, imageAnalysis);
-              //  startActivity(new Intent(CameraActivity.this, DiagnosticActivity.class));
+              
             }
         }, 5000);
     }
@@ -181,7 +181,7 @@ public class CameraActivity extends AppCompatActivity {
 
         File folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
         folder.mkdirs();
-        String photoName = System.currentTimeMillis() + ".jpg";
+        String photoName = "/" + System.currentTimeMillis() + ".jpg";
         String path = folder.getAbsolutePath() + photoName;
                 ImageCapture.OutputFileOptions outputFileOptions =
                 new ImageCapture.OutputFileOptions.Builder(new File(
@@ -196,7 +196,7 @@ public class CameraActivity extends AppCompatActivity {
                         List<PoseLandmark> allPoseLandmarks = analyzer.poseLandmarks;
                         Toast.makeText(CameraActivity.this, String.valueOf(allPoseLandmarks.get(0).getPosition3D().getX()), Toast.LENGTH_LONG).show();
                      //   Uri uri = outputFileResults.getSavedUri();
-                        addToDatabase(path);
+                        addToDatabase(path, allPoseLandmarks);
                         startActivity(new Intent(CameraActivity.this, DiagnosticActivity.class));
 
 
@@ -223,7 +223,7 @@ public class CameraActivity extends AppCompatActivity {
 
         processCameraProvider.bindToLifecycle((LifecycleOwner) this, cameraSelector, imageAnalysis, preview);
     }
-    public void addToDatabase(String path){
+    public void addToDatabase(String path, List<PoseLandmark> allPoseLandmarks){
 
 
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -231,14 +231,17 @@ public class CameraActivity extends AppCompatActivity {
         DatabaseReference anglesRef = database.getReference("Angles");
         DatabaseReference pushedAnglestRef = anglesRef.push();
         String anglesId = pushedAnglestRef.getKey();
-        Angles angles1 = new Angles();
-        angles1.setKyphosis(24.62021);
-
-
+        Angles angles = new Angles();
+        angles.setScoliosis(allPoseLandmarks);
+        angles.setKyphosis(allPoseLandmarks);
+        angles.setLordosis(allPoseLandmarks);
+        angles.setKneeValgus(allPoseLandmarks);
+        angles.setKneeVarus(allPoseLandmarks);
+        angles.setId(anglesId);
 
         FirebaseDatabase.getInstance().getReference("Angles")
                 .child(anglesId)
-                .setValue(angles1);
+                .setValue(angles);
 
         DatabaseReference diagnosticRef = database.getReference("Diagnostic");
         DatabaseReference pushedDiagnosticRef = diagnosticRef.push();

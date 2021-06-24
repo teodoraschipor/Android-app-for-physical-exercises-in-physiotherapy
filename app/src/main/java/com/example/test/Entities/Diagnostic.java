@@ -35,7 +35,9 @@ public class Diagnostic implements Serializable {
         return id;
     }
 
-  //  public Uri getImageUri() { return imageUri; }
+    public Date getDate() { return date; }
+
+    //  public Uri getImageUri() { return imageUri; }
 
 
     public String getImagePath() {
