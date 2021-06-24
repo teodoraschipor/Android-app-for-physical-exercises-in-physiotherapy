@@ -4,6 +4,7 @@ package com.example.test.Activities;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
@@ -29,19 +30,29 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LifecycleOwner;
 
+import com.example.test.Entities.Angles;
 import com.example.test.Entities.Diagnostic;
+import com.example.test.Entities.DiagnosticHasAngles;
+import com.example.test.Entities.UserIsDiagnosed;
 import com.example.test.MyImageAnalyzer;
 import com.example.test.R;
 import com.google.common.util.concurrent.ListenableFuture;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.mlkit.vision.pose.Pose;
 import com.google.mlkit.vision.pose.PoseLandmark;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
+import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -55,12 +66,11 @@ public class CameraActivity extends AppCompatActivity {
     private ExecutorService cameraExecutor;
     private PreviewView previewView;
     private MyImageAnalyzer analyzer;
-    private ImageCapture imageCapture;
     private TextView textViewTimer;
     final Handler handler = new Handler();
-
     private int REQUEST_CODE_PERMISSIONS = 101;
     private String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.CAMERA", "android.permission.WRITE_EXTERNAL_STORAGE"};
+    final FirebaseDatabase database = FirebaseDatabase.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,8 +134,6 @@ public class CameraActivity extends AppCompatActivity {
         }
     private void bindpreview(ProcessCameraProvider processCameraProvider) {
 
-     //   ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-      //          EXTERNAL_STORAGE_PERMISSION_CODE);
         Preview preview = new Preview.Builder().build();
         CameraSelector cameraSelector = new CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_FRONT).build();
         preview.setSurfaceProvider(previewView.getSurfaceProvider());
@@ -156,55 +164,42 @@ public class CameraActivity extends AppCompatActivity {
                 handler.removeCallbacks(runnable); //stop next runnable execution
                 textViewTimer.setVisibility(GONE);
                 captureImage(imageCapture, processCameraProvider, preview, cameraSelector, imageAnalysis);
+              //  startActivity(new Intent(CameraActivity.this, DiagnosticActivity.class));
             }
         }, 5000);
     }
 
-    public File getOutputDirectory() {
+   /* public File getOutputDirectory() {
 
         File folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-      //  File file = new File(folder, getResources().getString(R.string.directory));
-      //  File folder = new File(String.valueOf(Arrays.stream(getExternalMediaDirs()).findFirst()), getResources().getString(R.string.directory));
         folder.mkdirs();
         return folder;
 
     }
-
+*/
     public void captureImage(ImageCapture imageCapture, ProcessCameraProvider processCameraProvider, Preview preview, CameraSelector cameraSelector, ImageAnalysis imageAnalysis){
 
-        File outputDirectory = getOutputDirectory();
-        ImageCapture.OutputFileOptions outputFileOptions =
+        File folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+        folder.mkdirs();
+        String photoName = System.currentTimeMillis() + ".jpg";
+        String path = folder.getAbsolutePath() + photoName;
+                ImageCapture.OutputFileOptions outputFileOptions =
                 new ImageCapture.OutputFileOptions.Builder(new File(
-                        outputDirectory, System.currentTimeMillis() + ".jpg")).build();
+                        folder, photoName)).build();
         imageCapture.takePicture(outputFileOptions, ContextCompat.getMainExecutor(this),
                 new ImageCapture.OnImageSavedCallback() {
                     @Override
                     public void onImageSaved(ImageCapture.OutputFileResults outputFileResults) {
 
-                       // Diagnostic diagnostic = new Diagnostic();
-                       // diagnostic.setImagePath(outputDirectory.getAbsolutePath());
-               //         ImageAnalysis imageAnalysis = new ImageAnalysis.Builder().setTargetResolution(new Size(1200, 700))
-                 //               .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST).build();
-                  //      imageAnalysis.setAnalyzer(imageCapture, analyzer);
-
-                       // processCameraProvider.unbindAll();
-                       // processCameraProvider.bindToLifecycle(this, cameraSelector, preview, imageCapture, imageAnalysis);
-
-                      //  analyzer.poseDetection((ImageProxy) imageCapture);
-                    //    analyzer.poseDetection(imageCapture);
-                     //   List<PoseLandmark> all = analyzer.poseLandmarks;
-                      //  Integer s = all.size();
-                    //    s.toString();
-                       // Log.i("SIZE!!! ", String.valueOf(s));
-                       // addToDatabase();
-                        //  startActivity(new Intent(CameraActivity.this, DiagnosticActivity.class));
-
-                        Log.i("MERGEEE",":)");
-               //         analyzeImage(imageCapture, processCameraProvider, preview, cameraSelector, imageAnalysis);
-                     //   addToDatabase();
+                    //    Log.i("MERGEEE",":)");
+                        analyzeImage(imageCapture, processCameraProvider, preview, cameraSelector, imageAnalysis);
+                        List<PoseLandmark> allPoseLandmarks = analyzer.poseLandmarks;
+                        Toast.makeText(CameraActivity.this, String.valueOf(allPoseLandmarks.get(0).getPosition3D().getX()), Toast.LENGTH_LONG).show();
+                     //   Uri uri = outputFileResults.getSavedUri();
+                        addToDatabase(path);
                         startActivity(new Intent(CameraActivity.this, DiagnosticActivity.class));
 
-                       // Log.i("MERGEEE",":)");
+
                     }
 
                     @Override
@@ -220,10 +215,7 @@ public class CameraActivity extends AppCompatActivity {
         imageAnalysis.setAnalyzer(cameraExecutor, new ImageAnalysis.Analyzer() {
             @Override
             public void analyze(@NonNull ImageProxy image) {
-               // int rotationDegrees = image.getImageInfo().getRotationDegrees();
-                // insert your code here.
-
-
+                analyzer.analyze(image);
             }
         });
 
@@ -231,8 +223,58 @@ public class CameraActivity extends AppCompatActivity {
 
         processCameraProvider.bindToLifecycle((LifecycleOwner) this, cameraSelector, imageAnalysis, preview);
     }
-    public void addToDatabase(){
+    public void addToDatabase(String path){
 
+
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        DatabaseReference anglesRef = database.getReference("Angles");
+        DatabaseReference pushedAnglestRef = anglesRef.push();
+        String anglesId = pushedAnglestRef.getKey();
+        Angles angles1 = new Angles();
+        angles1.setKyphosis(24.62021);
+
+
+
+        FirebaseDatabase.getInstance().getReference("Angles")
+                .child(anglesId)
+                .setValue(angles1);
+
+        DatabaseReference diagnosticRef = database.getReference("Diagnostic");
+        DatabaseReference pushedDiagnosticRef = diagnosticRef.push();
+        String diagnosticId = pushedDiagnosticRef.getKey();
+        Diagnostic diagnostic = new Diagnostic();
+        diagnostic.setImagePath(path);
+        diagnostic.setDate(new Date(System.currentTimeMillis()));
+        diagnostic.setId(diagnosticId);
+
+
+        FirebaseDatabase.getInstance().getReference("Diagnostic")
+                .child(diagnosticId)
+                .setValue(diagnostic);
+
+
+        DatabaseReference diagnosticAnglesRef = database.getReference("Diagnostic has Angles");
+        DatabaseReference pushedDiagnosticAnglesRef = diagnosticAnglesRef.push();
+        String diagnosticAnglesId = pushedDiagnosticAnglesRef.getKey();
+        DiagnosticHasAngles diagnosticHasAngles = new DiagnosticHasAngles(anglesId, diagnosticId);
+
+
+        FirebaseDatabase.getInstance().getReference("Diagnostic has Angles")
+                .child(diagnosticAnglesId)
+                .setValue(diagnosticHasAngles);
+
+
+        DatabaseReference userDiagnosticRef = database.getReference("User is diagnosed");
+        DatabaseReference pushedUserDiagnosticRef = userDiagnosticRef.push();
+        String userDiagnosedUserId = pushedUserDiagnosticRef.getKey();
+        UserIsDiagnosed userIsDiagnosed = new UserIsDiagnosed(userId, diagnosticId);
+
+
+
+        FirebaseDatabase.getInstance().getReference("User is diagnosed")
+                .child(userDiagnosedUserId)
+                .setValue(userIsDiagnosed);
     }
 }
 

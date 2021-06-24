@@ -69,8 +69,8 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
 
     public void exercises(){
         // CONSIDER MOMENTAN CA AICI AM FACUT POZA
-
-      /*  String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+/*
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
     //    Diagnostic diagnostic = new Diagnostic();
     //    diagnostic.setImagePath("imagepatttththhhFINAL");
@@ -144,14 +144,14 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         String userDiagnosedDiagnosticId = userDiagnosedDiagnosticRef.push().getKey();
 
         Map<String, Object> userDiagnosedDiagnosticUpdates = new HashMap<>();
-        userDiagnosedDiagnosticUpdates.put(userDiagnosedDiagnosticId, diagnosticId);*/
+        userDiagnosedDiagnosticUpdates.put(userDiagnosedDiagnosticId, diagnosticId);
 
        // userDiagnosedDiagnosticRef.updateChildren(userDiagnosedDiagnosticUpdates);
        // FirebaseDatabase.getInstance().getReference("User is diagnosed")
        //         .child(userDiagnosticId)
       //          .setValue(userIsDiagnosed);
 
-
+*/
         startActivity(new Intent(this, ExercisesActivity.class));
 
     }

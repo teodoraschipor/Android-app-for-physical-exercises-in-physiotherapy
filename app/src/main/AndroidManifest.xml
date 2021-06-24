@@ -36,6 +36,7 @@
         <activity android:name=".Activities.LogInActivity"></activity>
         <activity android:name=".Activities.RegisterActivity"></activity>
         <activity android:name=".Activities.ForgotPasswordActivity"></activity>
+        <activity android:name=".Activities.DiagnosticActivity"></activity>
         <meta-data android:name="com.google.ar.core" android:value="required" />
     </application>
 

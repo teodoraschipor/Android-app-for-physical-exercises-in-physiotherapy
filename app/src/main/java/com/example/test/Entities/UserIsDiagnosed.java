@@ -11,4 +11,12 @@ public class UserIsDiagnosed implements Serializable {
         this.userId = userId;
         this.diagnosticId = diagnosticId;
     }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public String getDiagnosticId() {
+        return diagnosticId;
+    }
 }
