@@ -23,6 +23,11 @@ public class Diagnostic implements Serializable {
     public Diagnostic(){
 
     }
+    public Diagnostic(String imagePath, Date date, String id){
+        this.imagePath = imagePath;
+        this.date = date;
+        this.id = id;
+    }
 
   //  public void setImagePath(Uri imageUri){this.imageUri = imageUri;}
     public void setImagePath(String imagePath){ this.imagePath = imagePath;    }

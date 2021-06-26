@@ -14,13 +14,13 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class ExercisesActivity extends AppCompatActivity implements View.OnClickListener{
 
-    Button scoliosisBtn;
+    private Button scoliosisBtn;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //(Activity).setContentView(R.layout.activity_exercises);
         setContentView(R.layout.activity_exercises);
 
-        scoliosisBtn.findViewById(R.id.scoliosisBtn);
+        scoliosisBtn = (Button) findViewById(R.id.scoliosisBtn);
         scoliosisBtn.setOnClickListener(this);
     }
 

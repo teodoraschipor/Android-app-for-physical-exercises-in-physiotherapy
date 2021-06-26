@@ -28,6 +28,8 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
     private Button cameraButton;
     private Button logOutButton;
     private Button exercisesButton;
+    private Button progressButton;
+    private Button tutorialButton;
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
 
 
@@ -43,6 +45,12 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
 
         exercisesButton = findViewById(R.id.btnExercises);
         exercisesButton.setOnClickListener(this);
+
+        progressButton = findViewById(R.id.btnProgress);
+        progressButton.setOnClickListener(this);
+
+        tutorialButton = findViewById(R.id.btnTutorial);
+        tutorialButton.setOnClickListener(this);
 
     }
 
@@ -63,7 +71,12 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(this, ExercisesActivity.class));
                 //exercises();
                 break;
-
+            case R.id.btnProgress:
+                startActivity(new Intent(this, ProgressActivity.class));
+                break;
+            case R.id.btnTutorial:
+                startActivity(new Intent(this, TutorialActivity.class));
+                break;
         }
     }
 

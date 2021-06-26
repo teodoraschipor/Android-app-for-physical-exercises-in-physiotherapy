@@ -8,13 +8,13 @@
         android:maxSdkVersion="28"
         tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-feature android:name="android.hardware.camera.ar" android:required="true"/>
 
     <uses-feature android:glEsVersion="0x00030000" android:required="true" />
 
     <!-- Indicates that app requires ARCore ("AR Required"). Ensures the app is
          visible only in the Google Play Store on devices that support ARCore.
          For "AR Optional" apps remove this line. -->
-    <uses-feature android:name="android.hardware.camera.ar" />
     <application
         android:requestLegacyExternalStorage="true"
         android:allowBackup="true"
@@ -38,6 +38,7 @@
         <activity android:name=".Activities.ForgotPasswordActivity"></activity>
         <activity android:name=".Activities.DiagnosticActivity"></activity>
         <activity android:name=".Activities.TutorialActivity"></activity>
+        <activity android:name=".Activities.ProgressActivity"></activity>
         <meta-data android:name="com.google.ar.core" android:value="required" />
     </application>
 

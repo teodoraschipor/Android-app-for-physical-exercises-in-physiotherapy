@@ -216,10 +216,9 @@ public class Angles implements Serializable {
 
         double average = kneeAngle(allPoseLandmarks);
         double angle = average - 180;
-        if( angle > 0 ){
+        if (angle > 0) {
             this.kneeVarus = angle;
-        }
-        else {
+        } else {
             this.kneeVarus = 0;
         }
     }

@@ -1,9 +1,12 @@
 package com.example.test.Activities;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.test.Entities.Angles;
 import com.example.test.Entities.Diagnostic;
 import com.example.test.Entities.DiagnosticHasAngles;
+import com.example.test.Entities.Exercises;
 import com.example.test.Entities.UserIsDiagnosed;
 import com.example.test.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,8 +28,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
+import org.w3c.dom.Text;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -33,17 +39,24 @@ public class DiagnosticActivity extends AppCompatActivity {
 
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
     //  private ImageView imageView;
-    private TextView textView;
+ //   private TextView textView;
     private DatabaseReference reference;
  //   List<String> diagnosesId;
-    List<Diagnostic> diagnoses;
+//    List<Diagnostic> diagnoses;
     private String diagnosticId;
     private String imagePath;
     private Date date;
     private ImageView imageView;
     private TextView dateView;
     private String anglesId;
-    List<Double> anglesList;
+   // List<Double> anglesList;
+    private TextView angleScoliosis;
+    private TextView angleKyphosis;
+    private TextView angleLordosis;
+    private TextView angleKneeValgus;
+    private TextView angleKneeVarus;
+    private Button btnExercises;
+   // private List<Double> anglesList = new ArrayList<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,6 +66,17 @@ public class DiagnosticActivity extends AppCompatActivity {
         // imageView.findViewById(R.id.image);
         imageView = (ImageView) findViewById(R.id.imageView);
         dateView = (TextView) findViewById(R.id.date);
+        angleScoliosis = (TextView) findViewById(R.id.angleScoliosis);
+        angleKyphosis = (TextView) findViewById(R.id.angleKyphosis);
+        angleLordosis = (TextView) findViewById(R.id.angleLordosis);
+        angleKneeValgus = (TextView) findViewById(R.id.angleKneeValgus);
+        angleKneeVarus = (TextView) findViewById(R.id.angleKneeVarus);
+        btnExercises = findViewById(R.id.btnExercises);
+        btnExercises.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DiagnosticActivity.this, ExercisesActivity.class)); }
+        });
         displayDiagnostic();
         //imageView.setImageURI();
     }
@@ -125,6 +149,7 @@ public class DiagnosticActivity extends AppCompatActivity {
                                 // In "Angles". Looking for the angles with the id anglesId
                                 // and add each angle to the anglesList
                                 reference.child("Angles").addListenerForSingleValueEvent(new ValueEventListener() {
+
                                     @Override
                                     public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
 
@@ -132,14 +157,24 @@ public class DiagnosticActivity extends AppCompatActivity {
                                         for (DataSnapshot child : children) {
                                             Angles angles = child.getValue(Angles.class);
 
-                                            if (anglesId.equals(angles.getId())) {
+                                        //    anglesList.add(angles);
+                                         /*   if (anglesId.equals(angles.getId())) {
+
+                                                angleScoliosis.setText("Scoliosis angle: " + angles.getScoliosis());
+                                                angleKyphosis.setText("Kyphosis angle: " + angles.getKyphosis());
+                                                angleLordosis.setText("Lordosis angle: " + angles.getLordosis());
+                                                angleKneeValgus.setText("Knee valgus angle: " + angles.getKneeValgus());
+                                                angleKneeVarus.setText("Knee varus angle: " + angles.getKneeVarus());
+
                                                 anglesList.add(angles.getScoliosis());
                                                 anglesList.add(angles.getKyphosis());
                                                 anglesList.add(angles.getLordosis());
                                                 anglesList.add(angles.getKneeValgus());
                                                 anglesList.add(angles.getKneeVarus());
-                                            }
+                                            }*/
                                         }
+
+
 
                                     }
 
