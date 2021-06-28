@@ -1,10 +1,15 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.mlkit:mediapipe-internal:17.0.0-beta1@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b44d095f33d820ebbfa3602aa88049c2/jetified-mediapipe-internal-17.0.0-beta1/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2b57cc9d3e37ecfa859d5734c713a6d6/mediapipe-internal-17.0.0-beta1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2b57cc9d3e37ecfa859d5734c713a6d6/mediapipe-internal-17.0.0-beta1/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2b57cc9d3e37ecfa859d5734c713a6d6/mediapipe-internal-17.0.0-beta1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f68a6d33173a35ecd95f4eb224a467ea/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4271cd18f4589976c43f44911db36ca2/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ac22a8aa635d66c6233e63f7551a7c5a/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/334191020aa495f60806ef688e147096/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ade4df7f567fe434a1a815424c89c798/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e4b8fbaf480545a0ec7919510ef4e334/jetified-mediapipe-internal-17.0.0-beta1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a83d1a30928447c6030cb5b24ce08913/jetified-mediapipe-internal-17.0.0-beta1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a83d1a30928447c6030cb5b24ce08913/jetified-mediapipe-internal-17.0.0-beta1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a83d1a30928447c6030cb5b24ce08913/jetified-mediapipe-internal-17.0.0-beta1/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.mlkit/mediapipe-internal/17.0.0-beta1/27037f967d955876b3e29db6de6a24458c5b6080/mediapipe-internal-17.0.0-beta1-javadoc.jar!/" />

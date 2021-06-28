@@ -1,14 +1,16 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.print:print:1.0.0@aar">
     <ANNOTATIONS>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9f0406946f655bbcc21939bec3d8de38/print-1.0.0/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f636f7ab210ca7e6bb85e9eb758ef361/print-1.0.0/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/01df92b7300672a5ff8664dc3764ee51/print-1.0.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/12f5baadd5d1a3a114f657a42ab1cdfa/print-1.0.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9f0406946f655bbcc21939bec3d8de38/print-1.0.0/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9f0406946f655bbcc21939bec3d8de38/print-1.0.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9f0406946f655bbcc21939bec3d8de38/print-1.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/97e1aff5e3c60cb30d9950f238b33498/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/004136561a5b6bc482708e984ca4273c/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c72674c2ac6153ad05a5ac8ade840787/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/514504b83a7f4b8ecbe3804b07bbe0ef/print-1.0.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f636f7ab210ca7e6bb85e9eb758ef361/print-1.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f636f7ab210ca7e6bb85e9eb758ef361/print-1.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f636f7ab210ca7e6bb85e9eb758ef361/print-1.0.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

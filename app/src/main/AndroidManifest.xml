@@ -1,45 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+ Copyright 2018 Google LLC
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.test">
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.google.ar.sceneform.samples.animation">
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28"
         tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <!-- "AR Required" apps must declare minSdkVersion ≥ 24.
+         "AR Optional" apps must declare minSdkVersion ≥ 14 -->
+    <!-- Sceneform requires OpenGLES 3.0 or later. -->
+    <uses-feature android:glEsVersion="0x00030000" android:required="true" />
+    <!-- Always needed for AR. -->
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!-- Indicates that this app requires Google Play Services for AR ("AR Required") and results in
+         the app only being visible in the Google Play Store on devices that support ARCore.
+         For an "AR Optional" app, remove this tag. -->
     <uses-feature android:name="android.hardware.camera.ar" android:required="true"/>
 
-    <uses-feature android:glEsVersion="0x00030000" android:required="true" />
-
-    <!-- Indicates that app requires ARCore ("AR Required"). Ensures the app is
-         visible only in the Google Play Store on devices that support ARCore.
-         For "AR Optional" apps remove this line. -->
     <application
-        android:requestLegacyExternalStorage="true"
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:allowBackup="false"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.Test">
-        <activity android:name=".Activities.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="false"
+        tools:ignore="GoogleAppIndexingWarning">
+        <!-- Indicates that this app requires Google Play Services for AR ("AR Required") and causes
+             the Google Play Store to download and intall Google Play Services for AR along with
+             the app. For an "AR Optional" app, specify "optional" instead of "required". -->
+        <meta-data android:name="com.google.ar.core" android:value="required" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+        <activity android:name=".MainActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity android:name=".Activities.MenuActivity"></activity>
-        <activity android:name=".Activities.ExercisesActivity"></activity>
-        <activity android:name=".Activities.CameraActivity"></activity>
-        <activity android:name=".Activities.LogInActivity"></activity>
         <activity android:name=".Activities.RegisterActivity"></activity>
-        <activity android:name=".Activities.ForgotPasswordActivity"></activity>
-        <activity android:name=".Activities.DiagnosticActivity"></activity>
+        <activity android:name=".Activities.ScoliosisActivity"></activity>
+        <activity android:name=".Activities.LogInActivity"></activity>
+        <activity android:name=".Activities.CameraActivity"></activity>
+        <activity android:name=".Activities.ExercisesActivity"></activity>
         <activity android:name=".Activities.TutorialActivity"></activity>
         <activity android:name=".Activities.ProgressActivity"></activity>
-        <meta-data android:name="com.google.ar.core" android:value="required" />
+        <activity android:name=".Activities.ForgotPasswordActivity"></activity>
+        <activity android:name=".Activities.DiagnosticActivity"></activity>
     </application>
-
 </manifest>

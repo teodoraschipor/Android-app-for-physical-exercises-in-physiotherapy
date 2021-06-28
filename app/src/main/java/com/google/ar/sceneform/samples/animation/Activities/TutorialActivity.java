@@ -1,0 +1,23 @@
+package com.google.ar.sceneform.samples.animation.Activities;
+
+import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.ar.sceneform.samples.animation.Fragments.FirstTutorialFragment;
+import com.google.ar.sceneform.samples.animation.R;
+
+public class TutorialActivity extends AppCompatActivity {
+
+protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_tutorial);
+
+        if (savedInstanceState == null) {
+        getSupportFragmentManager().beginTransaction()
+        .setReorderingAllowed(true)
+        .add(R.id.fragment_container, FirstTutorialFragment.class, null)
+        .commit();
+        }
+        }
+        }

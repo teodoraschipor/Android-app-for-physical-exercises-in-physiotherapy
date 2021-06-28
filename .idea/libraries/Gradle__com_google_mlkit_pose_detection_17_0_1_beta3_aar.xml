@@ -1,10 +1,13 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.mlkit:pose-detection:17.0.1-beta3@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9f2f77b3a8e3ac57e129bb223e744cc6/jetified-pose-detection-17.0.1-beta3/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b3a66cf7ffbf3eb6a4e24ab8b5e089ba/pose-detection-17.0.1-beta3/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b3a66cf7ffbf3eb6a4e24ab8b5e089ba/pose-detection-17.0.1-beta3/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b3a66cf7ffbf3eb6a4e24ab8b5e089ba/pose-detection-17.0.1-beta3/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/bcc28c44186ad1d78f62e8e407785425/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2e0390ac3312efbec6bb7d2c54b3af5e/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c9c7ce9e28eed99ce148356c26b6c613/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/af9e6e8a2d431ed8ad2b6ed795102d07/jetified-pose-detection-17.0.1-beta3/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f3ec20b0535135ba68436cda8af08fe4/jetified-pose-detection-17.0.1-beta3/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f3ec20b0535135ba68436cda8af08fe4/jetified-pose-detection-17.0.1-beta3/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f3ec20b0535135ba68436cda8af08fe4/jetified-pose-detection-17.0.1-beta3/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.mlkit/pose-detection/17.0.1-beta3/2b19d2dd08a08b1ba808e546ad9abedae88a7209/pose-detection-17.0.1-beta3-javadoc.jar!/" />
