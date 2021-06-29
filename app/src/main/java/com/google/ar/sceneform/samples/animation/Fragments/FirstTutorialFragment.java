@@ -1,10 +1,12 @@
 package com.google.ar.sceneform.samples.animation.Fragments;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -44,4 +46,11 @@ public void onClick(View v) {
         }
         });
         }
+
+
+        void onException(int id, Throwable throwable) {
+                Toast toast = Toast.makeText(getContext(), "Something went wrong :) " + id, Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
         }
+}

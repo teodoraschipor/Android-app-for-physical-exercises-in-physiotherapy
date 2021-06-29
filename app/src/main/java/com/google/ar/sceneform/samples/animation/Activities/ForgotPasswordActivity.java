@@ -2,6 +2,7 @@ package com.google.ar.sceneform.samples.animation.Activities;
 
 import android.os.Bundle;
 import android.util.Patterns;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -65,9 +66,16 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                 if(task.isSuccessful()){
                     Toast.makeText(ForgotPasswordActivity.this, "Check your email to reset your password", Toast.LENGTH_LONG).show();
                 } else{
+                    progressBar.setVisibility(View.GONE);
                     Toast.makeText(ForgotPasswordActivity.this, "Try again! Something wrong happened!", Toast.LENGTH_LONG).show();
                 }
             }
         });
+    }
+
+    void onException(int id, Throwable throwable) {
+        Toast toast = Toast.makeText(this, "Something went wrong :) " + id, Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
     }
 }

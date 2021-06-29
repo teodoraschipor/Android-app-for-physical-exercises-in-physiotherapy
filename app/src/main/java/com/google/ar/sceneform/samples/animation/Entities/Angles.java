@@ -157,19 +157,46 @@ public class Angles implements Serializable {
         PoseLandmark rightEar = allPoseLandmarks.get(8);
         PoseLandmark leftShoulder = allPoseLandmarks.get(11);
         PoseLandmark rightShoulder = allPoseLandmarks.get(12);
-        PoseLandmark leftHip= allPoseLandmarks.get(23);
-        PoseLandmark rightHip = allPoseLandmarks.get(24);
+        PoseLandmark leftAnkle = allPoseLandmarks.get(27);
+        PoseLandmark rightAnkle = allPoseLandmarks.get(28);
+        Float newPointZ;
+        Float newPointY;
 
-        double angleLeft = getAngle2(leftEar.getPosition3D().getZ(), leftEar.getPosition3D().getY(),
-                leftShoulder.getPosition3D().getZ(), leftShoulder.getPosition3D().getY(),
-                leftHip.getPosition3D().getZ(), leftHip.getPosition3D().getY());
+        // Angle between left ear, left ankle and newPoint
+        newPointZ = leftAnkle.getPosition3D().getZ();
+        newPointY = leftEar.getPosition().y;
 
-        double angleRight = getAngle2(rightEar.getPosition3D().getZ(), rightEar.getPosition3D().getY(),
-                rightShoulder.getPosition3D().getZ(), rightShoulder.getPosition3D().getY(),
-                rightHip.getPosition3D().getZ(), rightHip.getPosition3D().getY());
+        double angleLeftEar = getAngle2(leftEar.getPosition3D().getZ(), leftEar.getPosition3D().getY(),
+                leftAnkle.getPosition3D().getZ(), leftAnkle.getPosition3D().getY(),
+                newPointZ, newPointY);
 
-        double average = (angleLeft + angleRight) / 2;
-        this.kyphosis = 180 - average;
+        // Angle between right ear, right ankle and newPoint
+        newPointZ = rightAnkle.getPosition3D().getZ();
+        newPointY = rightEar.getPosition().y;
+        double angleRightEar = getAngle2(rightEar.getPosition3D().getZ(), rightEar.getPosition3D().getY(),
+                rightAnkle.getPosition3D().getZ(), rightAnkle.getPosition3D().getY(),
+                newPointZ, newPointY);
+
+
+        // Angle between left shoulder, left ankle and newPoint
+        newPointZ = leftAnkle.getPosition3D().getZ();
+        newPointY = leftShoulder.getPosition().y;
+
+        double angleLeftShoulder = getAngle2(leftShoulder.getPosition3D().getZ(), leftShoulder.getPosition3D().getY(),
+                leftAnkle.getPosition3D().getZ(), leftAnkle.getPosition3D().getY(),
+                newPointZ, newPointY);
+
+        // Angle between right shoulder, right ankle and newPoint
+        newPointZ = rightAnkle.getPosition3D().getZ();
+        newPointY = rightShoulder.getPosition().y;
+
+        double angleRightShoulder = getAngle2(rightShoulder.getPosition3D().getZ(), rightShoulder.getPosition3D().getY(),
+                rightAnkle.getPosition3D().getZ(), rightAnkle.getPosition3D().getY(),
+                newPointZ, newPointY);
+
+        double average = (angleLeftEar + angleRightEar + angleLeftShoulder + angleRightShoulder) / 4;
+        this.kyphosis = average;
+
     }
 
     public void setLordosis(List<PoseLandmark> allPoseLandmarks) {
@@ -180,18 +207,28 @@ public class Angles implements Serializable {
          * */
         PoseLandmark leftEar = allPoseLandmarks.get(7);
         PoseLandmark rightEar = allPoseLandmarks.get(8);
-        PoseLandmark leftShoulder = allPoseLandmarks.get(11);
-        PoseLandmark rightShoulder = allPoseLandmarks.get(12);
+        PoseLandmark leftHip= allPoseLandmarks.get(23);
+        PoseLandmark rightHip = allPoseLandmarks.get(24);
         PoseLandmark leftAnkle = allPoseLandmarks.get(27);
         PoseLandmark rightAnkle = allPoseLandmarks.get(28);
+        Float newPointZ;
+        Float newPointY;
 
-        double angleLeft = getAngle2(leftEar.getPosition3D().getZ(), leftEar.getPosition3D().getY(),
-                leftShoulder.getPosition3D().getZ(), leftShoulder.getPosition3D().getY(),
-                leftAnkle.getPosition3D().getZ(), leftAnkle.getPosition3D().getY());
+        // Angle between left hip, left ankle and newPoint
+        newPointZ = leftAnkle.getPosition3D().getZ();
+        newPointY = leftHip.getPosition().y;
 
-        double angleRight = getAngle2(rightEar.getPosition3D().getZ(), rightEar.getPosition3D().getY(),
-                rightShoulder.getPosition3D().getZ(), rightShoulder.getPosition3D().getY(),
-                rightAnkle.getPosition3D().getZ(), rightAnkle.getPosition3D().getY());
+        double angleLeft = getAngle2(leftHip.getPosition3D().getZ(), leftHip.getPosition3D().getY(),
+                leftAnkle.getPosition3D().getZ(), leftAnkle.getPosition3D().getY(),
+                newPointZ, newPointY);
+
+        // Angle between right shoulder, right ankle and newPoint
+        newPointZ = rightAnkle.getPosition3D().getZ();
+        newPointY = rightHip.getPosition().y;
+
+        double angleRight = getAngle2(rightHip.getPosition3D().getZ(), rightHip.getPosition3D().getY(),
+                rightAnkle.getPosition3D().getZ(), rightAnkle.getPosition3D().getY(),
+                newPointZ, newPointY);
 
         double average = (angleLeft + angleRight) / 2;
         this.lordosis = 180 - average;

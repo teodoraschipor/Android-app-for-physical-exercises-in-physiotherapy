@@ -2,11 +2,13 @@ package com.google.ar.sceneform.samples.animation.Fragments;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
@@ -71,8 +73,6 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
 
             // duration.setText(item.getDuration());
             // movieImage.setImageDrawable(ContextCompat.getDrawable(movieImage.getContext(), item.getImageId()));
-
-
         }
     }
 }

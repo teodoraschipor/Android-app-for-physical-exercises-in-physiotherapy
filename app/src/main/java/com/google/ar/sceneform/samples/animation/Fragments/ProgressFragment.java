@@ -1,7 +1,9 @@
 package com.google.ar.sceneform.samples.animation.Fragments;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -158,6 +160,7 @@ public class ProgressFragment extends Fragment {
                     @Override
                     public void onCancelled(@NonNull @NotNull DatabaseError error) {
                         System.out.println("The read failed: " + error.getCode());
+                        Toast toast = Toast.makeText(getContext(), "Something went wrong :) ", Toast.LENGTH_LONG);
                     }
                 });
 
@@ -167,9 +170,15 @@ public class ProgressFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull @NotNull DatabaseError error) {
                 System.out.println("The read failed: " + error.getCode());
+                Toast toast = Toast.makeText(getContext(), "Something went wrong :) ", Toast.LENGTH_LONG);
             }
         });
 
+    }
+    void onException(int id, Throwable throwable) {
+        Toast toast = Toast.makeText(getContext(), "Something went wrong :) " + id, Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
     }
 
 }

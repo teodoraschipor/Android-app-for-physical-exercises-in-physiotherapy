@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -183,6 +185,7 @@ public class DiagnosticActivity extends AppCompatActivity {
                             @Override
                             public void onCancelled(@NonNull @NotNull DatabaseError error) {
                                 System.out.println("The read failed: " + error.getCode());
+                                Toast.makeText(DiagnosticActivity.this, "Something went wrong. Please try again :)", Toast.LENGTH_LONG).show();
                             }
                         });
 
@@ -192,6 +195,7 @@ public class DiagnosticActivity extends AppCompatActivity {
                     @Override
                     public void onCancelled(@NonNull @NotNull DatabaseError error) {
                         System.out.println("The read failed: " + error.getCode());
+                        Toast.makeText(DiagnosticActivity.this, "Something went wrong. Please try again :)", Toast.LENGTH_LONG).show();
                     }
                 });
             }
@@ -199,7 +203,14 @@ public class DiagnosticActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull @NotNull DatabaseError error) {
                 System.out.println("The read failed: " + error.getCode());
+                Toast.makeText(DiagnosticActivity.this, "Something went wrong. Please try again :)", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    void onException(int id, Throwable throwable) {
+        Toast toast = Toast.makeText(this, "Something went wrong :) " + id, Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
     }
 }

@@ -2,11 +2,13 @@ package com.google.ar.sceneform.samples.animation.Activities;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.hardware.camera2.CameraMetadata;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
 import android.util.Size;
+import android.view.Gravity;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +29,7 @@ import androidx.lifecycle.LifecycleOwner;
 import com.google.ar.sceneform.samples.animation.Entities.Angles;
 import com.google.ar.sceneform.samples.animation.Entities.Diagnostic;
 import com.google.ar.sceneform.samples.animation.Entities.DiagnosticHasAngles;
+import com.google.ar.sceneform.samples.animation.Entities.Diseases;
 import com.google.ar.sceneform.samples.animation.Entities.UserIsDiagnosed;
 import com.google.ar.sceneform.samples.animation.MyImageAnalyzer;
 import com.google.ar.sceneform.samples.animation.R;
@@ -181,17 +184,23 @@ public void onImageSaved(ImageCapture.OutputFileResults outputFileResults) {
         //    Log.i("MERGEEE",":)");
         analyzeImage(imageCapture, processCameraProvider, preview, cameraSelector, imageAnalysis);
         List<PoseLandmark> allPoseLandmarks = analyzer.poseLandmarks;
-        Toast.makeText(CameraActivity.this, String.valueOf(allPoseLandmarks.get(0).getPosition3D().getX()), Toast.LENGTH_LONG).show();
+        //Toast.makeText(CameraActivity.this, String.valueOf(allPoseLandmarks.get(0).getPosition3D().getX()), Toast.LENGTH_LONG).show();
         //   Uri uri = outputFileResults.getSavedUri();
-        addToDatabase(path, allPoseLandmarks);
-        startActivity(new Intent(CameraActivity.this, DiagnosticActivity.class));
-
-
+        if(allPoseLandmarks.size() != 0){
+                addToDatabase(path, allPoseLandmarks);
+                startActivity(new Intent(CameraActivity.this, DiagnosticActivity.class));
+                finish();
+        } else{
+                finish();
+                Log.i("ACTIVITY"," DESTROYED");
+                Toast.makeText(CameraActivity.this, "NO PERSON IDENTIFIED IN PHOTO. PLEASE TRY AGAIN :)", Toast.LENGTH_LONG).show();
+        }
         }
 
 @Override
 public void onError(@NonNull @NotNull ImageCaptureException exception) {
         Log.i("Failed to capture image",":)");
+        Toast.makeText(CameraActivity.this, "Something went wrong. Please try again :)", Toast.LENGTH_LONG).show();
         }
         }
         );
@@ -237,6 +246,18 @@ public void addToDatabase(String path, List<PoseLandmark> allPoseLandmarks){
         diagnostic.setImagePath(path);
         diagnostic.setDate(new Date(System.currentTimeMillis()));
         diagnostic.setId(diagnosticId);
+        Diseases diseases = new Diseases();
+        List<Integer> diseasesGradeList = diagnostic.diseasesGrade(angles);
+        diseases.setKyphosis(diseasesGradeList.get(0));
+        diseases.setScoliosis(diseasesGradeList.get(1));
+        diseases.setLordosis(diseasesGradeList.get(2));
+        diseases.setKneeValgus(diseasesGradeList.get(3));
+        diseases.setKneeVarus(diseasesGradeList.get(4));
+        diagnostic.setDiseases(diseases);
+       // String diseasesId = pushedDiagnosticRef.push().getKey();
+      //  FirebaseDatabase.getInstance().getReference("Diagnostic")
+        //        .child(diseasesId)
+         //       .setValue(diseasesGradeList);
 
 
         FirebaseDatabase.getInstance().getReference("Diagnostic")
@@ -266,5 +287,11 @@ public void addToDatabase(String path, List<PoseLandmark> allPoseLandmarks){
         .child(userDiagnosedUserId)
         .setValue(userIsDiagnosed);
         }
+
+        void onException(int id, Throwable throwable) {
+                Toast toast = Toast.makeText(this, "Something went wrong :) " + id, Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
         }
+}
 

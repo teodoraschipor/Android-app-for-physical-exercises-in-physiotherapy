@@ -3,6 +3,7 @@ package com.google.ar.sceneform.samples.animation.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -133,6 +134,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                 progressBar.setVisibility(View.GONE);
                                 // Redirect to login layout!
                                 startActivity(new Intent(RegisterActivity.this, LogInActivity.class));
+                                finish();
 
                             } else {
                                 Toast.makeText(RegisterActivity.this, "Failed to register! Try again!", Toast.LENGTH_LONG);
@@ -147,5 +149,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 }
             }
         });
+    }
+
+    void onException(int id, Throwable throwable) {
+        Toast toast = Toast.makeText(this, "Something went wrong :) " + id, Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
     }
 }

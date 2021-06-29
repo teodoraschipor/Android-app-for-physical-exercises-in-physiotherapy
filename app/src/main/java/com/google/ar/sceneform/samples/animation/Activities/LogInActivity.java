@@ -3,6 +3,7 @@ package com.google.ar.sceneform.samples.animation.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -104,14 +105,22 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
                     if(user.isEmailVerified()){
                         // redirect to menu
                         startActivity(new Intent(LogInActivity.this, MenuActivity.class));
+                        finish();
                     } else{
                         Toast.makeText(LogInActivity.this, "Check your email to verify your account!", Toast.LENGTH_LONG).show();
                         user.sendEmailVerification();
                     }
                 } else{
+                    progressBar.setVisibility(View.GONE);
                     Toast.makeText(LogInActivity.this, "Failed to login! Please check your credentials!", Toast.LENGTH_LONG).show();
                 }
             }
         });
+    }
+
+    void onException(int id, Throwable throwable) {
+        Toast toast = Toast.makeText(this, "Something went wrong :) " + id, Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
     }
 }
