@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Animation</string>
+    <string name="first_tutorial_title">Analyze your posture</string>
+    <string name="first_tutorial">You can see the button "OPEN CAMERA" in the main page of the app. Just click it, enable permissions to use camera and to save made photos in your gallery. Fix your phone somewhere and make sure that you whole body appear in photo (you will have to hurry up :). You only have 5 seconds). A photo will be taken and your diagnose will appear on screen. (We recommend to do this regularly, to be able to see improvements)</string>
+    <string name="first_tutorial_tip">Do not worry if you forget something from this tutorial! You can always rewatch it from the main page ("TUTORIAL" button).</string>
+    <string name="second_tutorial_title">Fix your posture with exercises :)</string>
+    <string name="second_tutorial">By clicking the "EXERCISES" button you can choose your exercise for your diagnostic and start working out. We provide a trainer also. Her name is Rain and we are sure you will like her. :)</string>
+    <string name="third_tutorial_title">Keep track of your progress</string>
+    <string name="third_tutorial">"PROGRESS" button will provide you a page with all your diagnoses and their details. </string>
+    <string name="third_tutorial_end">ENJOY! :)</string>
 </resources>

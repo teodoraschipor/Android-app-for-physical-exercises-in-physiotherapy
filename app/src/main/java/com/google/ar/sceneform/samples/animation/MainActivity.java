@@ -43,7 +43,10 @@ import com.google.ar.sceneform.math.Vector3;
 import com.google.ar.sceneform.rendering.AnimationData;
 import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.ar.sceneform.samples.animation.Activities.LogInActivity;
+import com.google.ar.sceneform.samples.animation.Activities.MenuActivity;
+import com.google.ar.sceneform.samples.animation.Activities.TutorialActivity;
 import com.google.ar.sceneform.ux.ArFragment;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -51,6 +54,7 @@ import java.util.TimerTask;
 /** Demonstrates playing animated FBX models. */
 public class MainActivity extends AppCompatActivity {
   Timer timer;
+  FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -75,9 +79,17 @@ public class MainActivity extends AppCompatActivity {
     timer.schedule(new TimerTask() {
       @Override
       public void run() {
-        Intent intent = new Intent(MainActivity.this, LogInActivity.class);
-        startActivity(intent);
-        finish();
+        if(firebaseAuth.getCurrentUser() != null){
+          Intent intent = new Intent(MainActivity.this, MenuActivity.class);
+          startActivity(intent);
+          finish();
+        }
+        else{
+          Intent intent = new Intent(MainActivity.this, TutorialActivity.class);
+          startActivity(intent);
+          finish();
+        }
+
       }
     }, 3000);
   }

@@ -1,5 +1,6 @@
 package com.google.ar.sceneform.samples.animation.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -14,7 +15,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.ar.sceneform.samples.animation.Activities.LogInActivity;
+import com.google.ar.sceneform.samples.animation.Activities.MenuActivity;
 import com.google.ar.sceneform.samples.animation.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class ThirdTutorialFragment extends Fragment {
 
@@ -39,16 +43,19 @@ public class ThirdTutorialFragment extends Fragment {
         // btnForward.findViewById(R.id.btnForward);
         // btnBack.findViewById(R.id.btnBack);
 
-       /* btnForward.setOnClickListener(new View.OnClickListener() {
+        btnForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager() ;
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction() ;
-                fragmentTransaction.replace(R.id. fragment_container , new ThirdTutorialFragment())
-                        .addToBackStack( null ) ;
-                fragmentTransaction.commit() ;
+                FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+                if(firebaseAuth.getCurrentUser() != null) {
+                    startActivity(new Intent(getContext(), MenuActivity.class));
+                    getActivity().finish();
+                } else {
+                    startActivity(new Intent(getContext(), LogInActivity.class));
+                    getActivity().finish();
+                }
             }
-        });*/
+        });
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override

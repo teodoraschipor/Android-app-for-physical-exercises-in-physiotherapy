@@ -228,8 +228,8 @@ public void addToDatabase(String path, List<PoseLandmark> allPoseLandmarks){
         DatabaseReference pushedAnglestRef = anglesRef.push();
         String anglesId = pushedAnglestRef.getKey();
         Angles angles = new Angles();
-        angles.setScoliosis(allPoseLandmarks);
         angles.setKyphosis(allPoseLandmarks);
+        angles.setScoliosis(allPoseLandmarks);
         angles.setLordosis(allPoseLandmarks);
         angles.setKneeValgus(allPoseLandmarks);
         angles.setKneeVarus(allPoseLandmarks);

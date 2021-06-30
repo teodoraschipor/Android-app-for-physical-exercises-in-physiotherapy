@@ -69,47 +69,8 @@ sceneform.asset('sampledata/firstEx_scoliosis_EnableAllFromRainSettings_000001.o
         'default',
         'sampledata/firstEx_scoliosis_EnableAllFromRainSettings_000001.sfa',
         'src/main/assets/firstEx_scoliosis_EnableAllFromRainSettings_000001')
-sceneform.asset('sampledata/firstEx_scoliosis_EnableAllFromRainSettings_000002.obj',
+
+sceneform.asset('sampledata/58_Movement_LODa_r01.fbx',
         'default',
-        'sampledata/firstEx_scoliosis_EnableAllFromRainSettings_000002.sfa',
-        'src/main/assets/firstEx_scoliosis_EnableAllFromRainSettings_000002')
-sceneform.asset('sampledata/firstEx_scoliosis_EnableAllFromRainSettings_000003.obj',
-        'default',
-        'sampledata/firstEx_scoliosis_EnableAllFromRainSettings_000003.sfa',
-        'src/main/assets/firstEx_scoliosis_EnableAllFromRainSettings_000003')
-sceneform.asset('sampledata/firstEx_scoliosis_EnableAllFromRainSettings_000004.obj',
-        'default',
-        'sampledata/firstEx_scoliosis_EnableAllFromRainSettings_000004.sfa',
-        'src/main/assets/firstEx_scoliosis_EnableAllFromRainSettings_000004')
-sceneform.asset('sampledata/firstEx_scoliosis_EnableAllFromRainSettings_000005.obj',
-        'default',
-        'sampledata/firstEx_scoliosis_EnableAllFromRainSettings_000005.sfa',
-        'src/main/assets/firstEx_scoliosis_EnableAllFromRainSettings_000005')
-sceneform.asset('sampledata/firstEx_scoliosis_EnableAllFromRainSettings_000006.obj',
-        'default',
-        'sampledata/firstEx_scoliosis_EnableAllFromRainSettings_000006.sfa',
-        'src/main/assets/firstEx_scoliosis_EnableAllFromRainSettings_000006')
-sceneform.asset('sampledata/firstEx_scoliosis_EnableAllFromRainSettings_000007.obj',
-        'default',
-        'sampledata/firstEx_scoliosis_EnableAllFromRainSettings_000007.sfa',
-        'src/main/assets/firstEx_scoliosis_EnableAllFromRainSettings_000007')
-sceneform.asset('sampledata/firstEx_scoliosis_EnableAllFromRainSettings_000008.obj',
-        'default',
-        'sampledata/firstEx_scoliosis_EnableAllFromRainSettings_000008.sfa',
-        'src/main/assets/firstEx_scoliosis_EnableAllFromRainSettings_000008')
-sceneform.asset('sampledata/firstEx_scoliosis_EnableAllFromRainSettings_000009.obj',
-        'default',
-        'sampledata/firstEx_scoliosis_EnableAllFromRainSettings_000009.sfa',
-        'src/main/assets/firstEx_scoliosis_EnableAllFromRainSettings_000009')
-sceneform.asset('sampledata/firstEx_scoliosis_EnableAllFromRainSettings_000010.obj',
-        'default',
-        'sampledata/firstEx_scoliosis_EnableAllFromRainSettings_000010.sfa',
-        'src/main/assets/firstEx_scoliosis_EnableAllFromRainSettings_000010')
-sceneform.asset('sampledata/firstEx_scoliosis_EnableAllFromRainSettings_000011.obj',
-        'default',
-        'sampledata/firstEx_scoliosis_EnableAllFromRainSettings_000011.sfa',
-        'src/main/assets/firstEx_scoliosis_EnableAllFromRainSettings_000011')
-sceneform.asset('sampledata/firstEx_scoliosis_EnableAllFromRainSettings_000012.obj',
-        'default',
-        'sampledata/firstEx_scoliosis_EnableAllFromRainSettings_000012.sfa',
-        'src/main/assets/firstEx_scoliosis_EnableAllFromRainSettings_000012')
+        'sampledata/58_Movement_LODa_r01.sfa',
+        'src/main/assets/58_Movement_LODa_r01')

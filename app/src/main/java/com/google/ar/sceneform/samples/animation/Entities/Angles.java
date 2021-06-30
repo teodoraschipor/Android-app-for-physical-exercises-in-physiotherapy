@@ -9,13 +9,12 @@ import static java.lang.Math.atan2;
 
 public class Angles implements Serializable {
 
-    public double scoliosis;
     public double kyphosis;
+    public double scoliosis;
     public double lordosis;
     public double kneeValgus;
     public double kneeVarus;
     public String id;
-
 
     //------------CONSTRUCTORS-----------
     public Angles(){

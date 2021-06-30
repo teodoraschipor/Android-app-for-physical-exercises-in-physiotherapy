@@ -3,12 +3,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="YOUR DIAGNOSTIC"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:textColor="@color/colorButton"
+        />
     <ImageView
         android:layout_width="300dp"
-        android:layout_height="400dp"
+        android:layout_height="450dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="65dp"
         app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/imageView"/>
     <TextView
@@ -22,7 +35,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/angleScoliosis"
+        android:id="@+id/angleKyphosis"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/date"
@@ -30,10 +43,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/angleKyphosis"
+        android:id="@+id/angleScoliosis"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/angleScoliosis"
+        app:layout_constraintTop_toBottomOf="@+id/angleKyphosis"
         android:layout_marginTop="5dp"/>
     <TextView
         android:layout_width="wrap_content"
@@ -41,7 +54,7 @@
         android:id="@+id/angleLordosis"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/angleKyphosis"
+        app:layout_constraintTop_toBottomOf="@+id/angleScoliosis"
         android:layout_marginTop="5dp"/>
     <TextView
         android:layout_width="wrap_content"
