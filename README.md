@@ -1,6 +1,6 @@
 # Android app for physical exercises in physiotherapy
  
-This app was developed for my bachelor degree's final project in June 2021.
+**This app was developed for my bachelor degree's final project in June 2021.**
 
 ###### What is Healthy Pose?
 Healthy Pose is an Android app intended for people with certain body position dysfunctions that want to correct them. 
