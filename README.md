@@ -1,6 +1,6 @@
 # Android app for physical exercises in physiotherapy
 
-## ATTENTION! -- This is not the final code. Final version will be added --
+## ATTENTION! -- This is not the final code. The final version will be added --
  
 **This app was developed for the final exam of my bachelor's degree in June 2021.**
 
